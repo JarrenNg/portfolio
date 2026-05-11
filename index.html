@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jarren Ng — Financial Risk Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --gold: #b8960c;
+    --gold-light: #d4af37;
+    --muted: #6b6560;
+    --rule: rgba(13,13,13,0.12);
+    --accent-bg: #1a1a1a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--rule);
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-mark {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nav-links {
+    font-size: 0.875rem;
+    display: flex;
+    gap: 2.4rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ── intro ── */
+  #intro {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+
+  .intro-left {
+    padding: 6rem 3rem 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--rule);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.9s ease forwards 0.2s;
+  }
+
+  .intro-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+  }
+
+  .intro-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+
+  .intro-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .intro-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 2.4rem;
+    padding-bottom: 2.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .intro-bio {
+    font-size: 1.05rem;
+    color: #3a3530;
+    max-width: 480px;
+    line-height: 1.8;
+  }
+
+  .intro-bio strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .intro-right {
+    background: var(--accent-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 0.5s;
+  }
+
+  .intro-right::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,150,12,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 3rem;
+  }
+
+  .stat {
+    padding: 1.8rem 1.6rem;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .intro-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.4rem;
+    line-height: 1.6;
+  }
+
+  /* ── PROJECT PAGE ── */
+  #work, #page3, #page4 {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--rule);
+  }
+
+  .project-left {
+    padding: 7rem 3.5rem 5rem 3rem;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .project-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .project-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.6rem;
+  }
+
+  .project-block {
+    margin-bottom: 2.2rem;
+  }
+
+  .project-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .project-block-text {
+    font-size: 0.95rem;
+    color: #3a3530;
+    line-height: 1.85;
+    max-width: 480px;
+  }
+
+  /* ── RESULTS TABLE ── */
+  .results-block {
+    margin-top: 0.4rem;
+  }
+
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    margin-top: 0.6rem;
+  }
+
+  .results-table thead tr {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .results-table th {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 0.6rem 0.8rem 0.6rem 0;
+    text-align: center;
+  }
+
+  .results-table th:first-child {
+    text-align: left;
+  }
+
+  .results-table td {
+    padding: 0.75rem 0.8rem 0.75rem 0;
+    text-align: center;
+    color: #3a3530;
+    border-bottom: 1px solid rgba(13,13,13,0.06);
+    font-size: 0.82rem;
+  }
+
+  .results-table td:first-child {
+    text-align: left;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .results-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Highlight MSR column */
+  .results-table .col-msr {
+    color: var(--gold) !important;
+    font-weight: 500;
+  }
+
+  .results-table .col-delta {
+    color: #2a6b3a !important;
+    font-weight: 500;
+  }
+
+  .results-table tbody tr:hover td {
+    background: rgba(184,150,12,0.04);
+  }
+
+  /* ── KEY RESULTS LIST (for Project 2) ── */
+  .key-results-list {
+    list-style: none;
+    margin-top: 0.6rem;
+  }
+
+  .key-results-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(13,13,13,0.06);
+    font-size: 0.92rem;
+    color: #3a3530;
+    line-height: 1.7;
+  }
+
+  .key-results-list li:last-child {
+    border-bottom: none;
+  }
+
+  .key-results-list .result-headline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  /* ── IMAGE PLACEHOLDER PANEL ── */
+  .project-right {
+    background: #f0ebe0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem 3rem;
+    gap: 2rem;
+    position: relative;
+  }
+
+  .img-placeholder {
+    width: 100%;
+    max-width: 420px;
+    border: 1px dashed rgba(13,13,13,0.18);
+    background: rgba(245,240,232,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 3rem 2rem;
+    position: relative;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .img-placeholder:hover {
+    border-color: var(--gold);
+    background: rgba(184,150,12,0.04);
+  }
+
+  .img-placeholder-icon {
+    opacity: 0.25;
+  }
+
+  .img-placeholder-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .img-placeholder-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--muted);
+    opacity: 0.7;
+    text-align: center;
+  }
+
+  .img-corner {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-color: var(--gold);
+    border-style: solid;
+    opacity: 0.45;
+  }
+
+  .img-corner.tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+  .img-corner.tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
+  .img-corner.bl { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
+  .img-corner.br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+  /* ── EMPTY PAGE ── */
+  .empty-page {
+    min-height: 100vh;
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ── SECTION SHARED ── */
+  section {
+    padding: 7rem 3rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.6rem;
+    margin-bottom: 5rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--accent-bg); }
+
+  #skills .section-title { color: #f5f0e8; }
+  #skills .section-num { color: var(--gold); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .skill-item {
+    padding: 2.6rem 2.8rem;
+    background: var(--accent-bg);
+    transition: background 0.25s;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .skill-item:hover { background: #222; }
+
+  .skill-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #f5f0e8;
+    margin-bottom: 0.6rem;
+  }
+
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: inline-block;
+    border: 1px solid rgba(184,150,12,0.35);
+    padding: 0.2rem 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-desc {
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.7;
+  }
+
+  /* ── REFLECTION ── */
+  #reflection {
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  .reflection-left {
+    padding: 7rem 3rem;
+    border-right: 1px solid var(--rule);
+  }
+
+  .reflection-right {
+    padding: 7rem 3rem;
+    background: #f0ebe0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .reflection-block {
+    margin-bottom: 3rem;
+  }
+
+  .reflection-block:last-child { margin-bottom: 0; }
+
+  .reflection-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .reflection-text {
+    font-size: 1rem;
+    color: #3a3530;
+    line-height: 1.8;
+  }
+
+  .big-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.35;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .big-quote em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(245,240,232,0.5);
+    padding: 2.4rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  footer span { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .rule-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .rule-line::before, .rule-line::after {
+    content: '';
+    height: 1px;
+    background: var(--rule);
+    width: 40px;
+  }
+
+  @media (max-width: 900px) {
+    #intro, #work, #page3 { grid-template-columns: 1fr; }
+    .intro-right { min-height: 50vh; }
+    .skills-grid { grid-template-columns: 1fr; }
+    #reflection { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.4rem; }
+    .nav-links { gap: 1.4rem; }
+    section { padding: 4rem 1.4rem; }
+    .intro-left, .project-left { padding: 5rem 1.4rem 3rem; }
+    .intro-right, .project-right { padding: 3rem 1.4rem; }
+    .project-right { min-height: 60vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-mark">Portfolio</span>
+  <ul class="nav-links">
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+  </ul>
+</nav>
+
+<!-- intro -->
+<section id="intro" style="padding:0; border-top:none;">
+  <div class="intro-left">
+    <div style="display:flex; align-items:center; gap:2rem;">
+      <h1 class="intro-name" style="margin:0; line-height:1.1;">
+        Jarren<br><em>Ng</em>
+      </h1>
+    </div>
+    <p class="intro-role">Financial Risk Management</p>
+    <p class="intro-bio">
+      A <strong>"logic-first"</strong> approach to problem-solving. I specialize in transforming complex datasets into actionable insights, with hands-on experience in AML/KYC compliance and quantitative risk modeling. Passionate about credit, market, and operational risk.
+    </p>
+  </div>
+  <div class="intro-right">
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-number">Gold Tier</div>
+        <div class="stat-label">WorldQuant Research Consultant</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">UOB</div>
+        <div class="stat-label">AML experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">SUTD</div>
+        <div class="stat-label">Global Merit Scholar</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">4.25/5</div>
+        <div class="stat-label">GPA</div>
+      </div>
+    </div>
+    <blockquote class="intro-quote">
+      "The core of any technical role is the ability to rigorously validate your assumptions."
+    </blockquote>
+  </div>
+</section>
+
+<!-- PROJECT PAGE 1: Portfolio Optimization -->
+<div id="work">
+  <div class="project-left">
+    <div class="project-eyebrow reveal">01 &mdash; Project</div>
+    <h2 class="project-title reveal" style="transition-delay:0.08s">Portfolio<br>Optimization</h2>
+
+    <div class="project-block reveal" style="transition-delay:0.14s">
+      <div class="project-block-label">Objective</div>
+      <p class="project-block-text">
+        Construct a high-performance portfolio of 5 stocks (NVDA, MSFT, LLY, JNJ, GD) via mean-variance optimization, targeting the Maximum Sharpe Ratio portfolio on the Efficient Frontier — maximizing risk-adjusted return.
+      </p>
+    </div>
+
+    <div class="project-block reveal" style="transition-delay:0.2s">
+      <div class="project-block-label">The Approach</div>
+      <p class="project-block-text">
+        Formulated a non-linear optimization problem to identify the Tangency Portfolio, where each additional unit of risk yields the highest marginal return. Benchmarked against a naive equal-weight baseline and the Minimum Variance portfolio to evaluate the risk-return tradeoff.
+      </p>
+    </div>
+
+    <div class="project-block results-block reveal" style="transition-delay:0.26s">
+      <div class="project-block-label">Key Results</div>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Equal-Weight</th>
+            <th>Min Variance</th>
+            <th>MSR</th>
+            <th>MSR vs EW</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Expected Return</td>
+            <td>29.2%</td>
+            <td>13.7%</td>
+            <td class="col-msr">38.3%</td>
+            <td class="col-delta">+31.1%</td>
+          </tr>
+          <tr>
+            <td>Volatility (Risk)</td>
+            <td>18.9%</td>
+            <td>13.4%</td>
+            <td class="col-msr">22.5%</td>
+            <td>+19.3%</td>
+          </tr>
+          <tr>
+            <td>Sharpe Ratio</td>
+            <td>1.39</td>
+            <td>0.79</td>
+            <td class="col-msr">1.57</td>
+            <td class="col-delta">+12.9%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RIGHT: Image placeholders -->
+  <div class="project-right">
+    <div class="img-placeholder reveal">
+      <div class="img-corner tl"></div>
+      <div class="img-corner tr"></div>
+      <div class="img-corner bl"></div>
+      <div class="img-corner br"></div>
+      <svg class="img-placeholder-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="38" height="38" rx="2" stroke="#6b6560" stroke-width="1.5"/>
+        <circle cx="13" cy="15" r="4" stroke="#6b6560" stroke-width="1.5"/>
+        <path d="M1 27l10-8 8 6 7-9 13 10" stroke="#6b6560" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <div class="img-placeholder-label">Efficient Frontier Chart</div>
+      <div class="img-placeholder-sub">Insert chart image here</div>
+    </div>
+
+    <div class="img-placeholder reveal" style="transition-delay:0.15s">
+      <div class="img-corner tl"></div>
+      <div class="img-corner tr"></div>
+      <div class="img-corner bl"></div>
+      <div class="img-corner br"></div>
+      <svg class="img-placeholder-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="38" height="38" rx="2" stroke="#6b6560" stroke-width="1.5"/>
+        <rect x="7" y="22" width="5" height="11" stroke="#6b6560" stroke-width="1.5"/>
+        <rect x="17" y="14" width="5" height="19" stroke="#6b6560" stroke-width="1.5"/>
+        <rect x="27" y="8" width="5" height="25" stroke="#6b6560" stroke-width="1.5"/>
+      </svg>
+      <div class="img-placeholder-label">Portfolio Weights</div>
+      <div class="img-placeholder-sub">Insert allocation chart here</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT PAGE 2: Maritime Freight Rate Forecasting -->
+<div id="page3">
+  <div class="project-left">
+    <div class="project-eyebrow reveal">02 &mdash; Project</div>
+    <h2 class="project-title reveal" style="transition-delay:0.08s">Maritime Freight<br>Rate Forecasting</h2>
+
+    <div class="project-block reveal" style="transition-delay:0.14s">
+      <div class="project-block-label">Objective</div>
+      <p class="project-block-text">
+        To engineer a high-precision predictive model for shipping rates, enabling data-driven chartering decisions for our client, Eastport Maritime.
+      </p>
+    </div>
+
+    <div class="project-block reveal" style="transition-delay:0.2s">
+      <div class="project-block-label">The Approach</div>
+      <p class="project-block-text">
+        Developed multiple iterations to improve model prediction, moving from a univariate ARIMA baseline to a multivariate ARIMAX model that incorporates external variables. Conducted extensive stress testing by comparing performance when using "Actual" vs. "Predicted" exogenous variables.
+      </p>
+    </div>
+
+    <div class="project-block results-block reveal" style="transition-delay:0.26s">
+      <div class="project-block-label">Key Results</div>
+      <ul class="key-results-list">
+        <li>
+          <span class="result-headline">6.46% Test MAPE</span>
+          Attained exceptional predictive precision on out-of-sample data, outperforming the 10%–20% industry standard for volatile maritime sectors.
+        </li>
+        <li>
+          <span class="result-headline">75% Directional Accuracy</span>
+          Established a significant strategic edge by correctly anticipating market changes (Benchmark: 60%–80%).
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- RIGHT: Image placeholders -->
+  <div class="project-right">
+    <div class="img-placeholder reveal">
+      <div class="img-corner tl"></div>
+      <div class="img-corner tr"></div>
+      <div class="img-corner bl"></div>
+      <div class="img-corner br"></div>
+      <svg class="img-placeholder-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="38" height="38" rx="2" stroke="#6b6560" stroke-width="1.5"/>
+        <polyline points="4,32 12,20 20,25 28,12 36,8" stroke="#6b6560" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+        <line x1="4" y1="36" x2="36" y2="36" stroke="#6b6560" stroke-width="1"/>
+      </svg>
+      <div class="img-placeholder-label">Forecast vs Actual Chart</div>
+      <div class="img-placeholder-sub">Insert time-series chart here</div>
+    </div>
+
+    <div class="img-placeholder reveal" style="transition-delay:0.15s">
+      <div class="img-corner tl"></div>
+      <div class="img-corner tr"></div>
+      <div class="img-corner bl"></div>
+      <div class="img-corner br"></div>
+      <svg class="img-placeholder-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="38" height="38" rx="2" stroke="#6b6560" stroke-width="1.5"/>
+        <rect x="6" y="18" width="8" height="15" stroke="#6b6560" stroke-width="1.5"/>
+        <rect x="16" y="10" width="8" height="23" stroke="#6b6560" stroke-width="1.5"/>
+        <rect x="26" y="14" width="8" height="19" stroke="#6b6560" stroke-width="1.5"/>
+      </svg>
+      <div class="img-placeholder-label">Model Comparison</div>
+      <div class="img-placeholder-sub">Insert ARIMA vs ARIMAX results here</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT PAGE 3: Neural Network Verification -->
+  <div id="page4">
+    <div class="project-left">
+      <div class="project-eyebrow reveal">03 &mdash; Project</div>
+      <h2 class="project-title reveal" style="transition-delay:0.08s">Neural Network<br>Verification</h2>
+      <div class="project-block reveal" style="transition-delay:0.14s">
+        <div class="project-block-label">Objective</div>
+        <p class="project-block-text">
+          To mathematically verify the robustness of a leaf-vitality classifier, ensuring its reliability against imperceptible environmental changes.
+        </p>
+      </div>
+      <div class="project-block reveal" style="transition-delay:0.2s">
+        <div class="project-block-label">The Approach</div>
+        <p class="project-block-text">
+          Translated a deep learning model into a Mixed-Integer Linear Programming framework to find absolute worst-case vulnerabilities. Tested boundary of ±0.01 brightness change in each pixel to identify if imperceptible pixel changes could flip predictions from "Diseased" to "Healthy".
+        </p>
+      </div>
+      <div class="project-block results-block reveal" style="transition-delay:0.26s">
+        <div class="project-block-label">Key Results</div>
+        <ul class="key-results-list">
+          <li>
+            <span class="result-headline">Failed Certification</span>
+            Proved the model was not certifiably robust, highlighting critical risks for real-world deployment.
+          </li>
+          <li>
+            <span class="result-headline">Potential Improvements</span>
+            Adversarial training by including perturbed images in the training set to strengthen model resilience.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="project-right">
+      <div class="img-placeholder reveal">
+        <div class="img-corner tl"></div>
+        <div class="img-corner tr"></div>
+        <div class="img-corner bl"></div>
+        <div class="img-corner br"></div>
+        <svg class="img-placeholder-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="38" height="38" rx="2" stroke="#6b6560" stroke-width="1.5"/>
+          <circle cx="20" cy="20" r="10" stroke="#6b6560" stroke-width="1.5"/>
+          <line x1="20" y1="10" x2="20" y2="30" stroke="#6b6560" stroke-width="1"/>
+          <line x1="10" y1="20" x2="30" y2="20" stroke="#6b6560" stroke-width="1"/>
+          <path d="M14 14 L26 26 M26 14 L14 26" stroke="#6b6560" stroke-width="1" stroke-dasharray="2 2"/>
+        </svg>
+        <div class="img-placeholder-label">Perturbation Boundary</div>
+        <div class="img-placeholder-sub">Insert pixel perturbation visualisation here</div>
+      </div>
+      <div class="img-placeholder reveal" style="transition-delay:0.15s">
+        <div class="img-corner tl"></div>
+        <div class="img-corner tr"></div>
+        <div class="img-corner bl"></div>
+        <div class="img-corner br"></div>
+        <svg class="img-placeholder-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="38" height="38" rx="2" stroke="#6b6560" stroke-width="1.5"/>
+          <rect x="5" y="5" width="12" height="12" rx="1" stroke="#6b6560" stroke-width="1.5"/>
+          <rect x="23" y="5" width="12" height="12" rx="1" stroke="#6b6560" stroke-width="1.5"/>
+          <rect x="5" y="23" width="12" height="12" rx="1" stroke="#6b6560" stroke-width="1.5"/>
+          <rect x="23" y="23" width="12" height="12" rx="1" stroke="#6b6560" stroke-width="1.5"/>
+          <line x1="17" y1="11" x2="23" y2="11" stroke="#6b6560" stroke-width="1"/>
+          <line x1="11" y1="17" x2="11" y2="23" stroke="#6b6560" stroke-width="1"/>
+          <line x1="29" y1="17" x2="29" y2="23" stroke="#6b6560" stroke-width="1"/>
+          <line x1="17" y1="29" x2="23" y2="29" stroke="#6b6560" stroke-width="1"/>
+        </svg>
+        <div class="img-placeholder-label">MILP Network Diagram</div>
+        <div class="img-placeholder-sub">Insert model architecture diagram here</div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title" style="color:#f5f0e8;">Evidence-Based Skills</h2>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-item reveal">
+      <div class="skill-name">Quantitative Risk Modeling</div>
+      <span class="skill-tag">Python &middot; Time-Series</span>
+      <p class="skill-desc">Engineered and backtested market-neutral trading alphas on the WorldQuant BRAIN platform, optimizing for Sharpe ratio and minimizing turnover. Applied mean-variance optimization to build a risk-adjusted equity portfolio balancing return, volatility, and liquidity risk.</p>
+    </div>
+    <div class="skill-item reveal" style="transition-delay:0.1s">
+      <div class="skill-name">Model Verification</div>
+      <span class="skill-tag">MILP &middot; Neural Networks</span>
+      <p class="skill-desc">Formulated adversarial robustness of a leaf classification neural network as a Mixed Integer Linear Program, verifying model vulnerability to imperceptible input perturbations — going beyond test accuracy to provable guarantees.</p>
+    </div>
+    <div class="skill-item reveal" style="transition-delay:0.2s">
+      <div class="skill-name">Regulatory Compliance and AML/KYC</div>
+      <span class="skill-tag">MAS 626 &middot; Risk Management</span>
+      <p class="skill-desc">Assessed 100+ clients for Incomplete Customer Due Diligence (ICDD) at UOB, recommending risk controls in full adherence with MAS 626. Justified risk mitigation strategies for 50+ high-complexity cases in direct collaboration with supervisors.</p>
+    </div>
+    <div class="skill-item reveal" style="transition-delay:0.3s">
+      <div class="skill-name">Visual Communication</div>
+      <span class="skill-tag">Design &middot; Presentations</span>
+      <p class="skill-desc">Skilled in designing high-contrast, accessible technical posters and presentations for corporate clients — communicating quantitative insights without losing the audience.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection" style="border-top: 1px solid var(--rule);">
+  <div class="reflection-left">
+    <div class="section-header" style="margin-bottom:3rem">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Reflection</h2>
+    </div>
+    <div class="reflection-block reveal">
+      <div class="reflection-label">Growth Mindset</div>
+      <p class="reflection-text">
+        A 0% error rate loading weapons on F-16s, assessing hundreds of AML cases at UOB, and formally verifying neural networks at SUTD all demand the same discipline: rigorous validation before you commit. The domain changes; the standard does not.
+      </p>
+    </div>
+    <div class="reflection-block reveal" style="transition-delay:0.15s">
+      <div class="reflection-label">Future Goal</div>
+      <p class="reflection-text">
+        I aim to apply quantitative modeling and formal verification to financial risk — building systems for credit, market, or operational risk that are not just accurate, but provably resilient under stress.
+      </p>
+    </div>
+  </div>
+  <div class="reflection-right">
+    <div class="rule-line">Ethos</div>
+    <p class="big-quote reveal">
+      "Don't just build models that <em>work</em> — verify that they <em>should</em> be trusted."
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>Jarren Ng &mdash; <span>SUTD Global Merit Scholar</span></div>
+  <div>Financial Risk Management &mdash; <span>2026</span></div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
