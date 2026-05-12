@@ -783,14 +783,21 @@
 
   <!-- RIGHT: Image placeholders -->
   <div class="project-right">
-  <img src="images/arima.png" 
-       alt="arima" 
-       class="reveal" 
-       style="width: 100%; height: auto; border-radius: 8px;">  
-  <img src="images/arimax_comparison.png" 
-       alt="arimax_comparison" 
-       class="reveal"
-       style="width: 100%; height: auto; border-radius: 8px;">  
+  <figure style="margin: 0;">
+    <img src="images/arima.png" alt="arima" class="reveal" 
+         style="width: 100%; height: auto; border-radius: 8px;">
+    <figcaption style="font-size: 0.75rem; color: #888; margin-top: 6px;">
+      ARIMA baseline forecast (orange dashed) vs. actuals — limited capture of exogenous-driven volatility
+    </figcaption>
+  </figure>
+
+  <figure style="margin: 0;">
+    <img src="images/arimax_comparison.png" alt="arimax_comparison" class="reveal"
+         style="width: 100%; height: auto; border-radius: 8px;">
+    <figcaption style="font-size: 0.75rem; color: #888; margin-top: 6px;">
+      ARIMAX stress test: actual (red dashed) vs. predicted exogenous variables (purple dashed) — 6.46% test MAPE under realistic forecast conditions
+    </figcaption>
+  </figure>
 </div>
 </div>
 
