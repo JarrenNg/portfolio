@@ -490,8 +490,8 @@
     line-height: 1.7;
   }
 
-  /* ── Testimonials ── */
-  #Testimonials {
+  /* ── Testimonial ── */
+  #Testimonial {
     background: var(--paper);
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -499,12 +499,12 @@
     padding: 0;
   }
 
-  .Testimonials-left {
+  .Testimonial-left {
     padding: 7rem 3rem;
     border-right: 1px solid var(--rule);
   }
 
-  .Testimonials-right {
+  .Testimonial-right {
     padding: 7rem 3rem;
     background: #f0ebe0;
     display: flex;
@@ -512,13 +512,13 @@
     justify-content: center;
   }
 
-  .Testimonials-block {
+  .Testimonial-block {
     margin-bottom: 3rem;
   }
 
-  .Testimonials-block:last-child { margin-bottom: 0; }
+  .Testimonial-block:last-child { margin-bottom: 0; }
 
-  .Testimonials-label {
+  .Testimonial-label {
     font-family: 'DM Mono', monospace;
     font-size: 1.0rem;
     letter-spacing: 0.05em;
@@ -528,7 +528,7 @@
     margin-bottom: 0.8rem;
   }
 
-  .Testimonials-text {
+  .Testimonial-text {
     font-size: 1rem;
     color: #3a3530;
     line-height: 1.8;
@@ -608,7 +608,7 @@
     #intro, #work, #page3 { grid-template-columns: 1fr; }
     .intro-right { min-height: 50vh; }
     .skills-grid { grid-template-columns: 1fr; }
-    #Testimonials { grid-template-columns: 1fr; }
+    #Testimonial { grid-template-columns: 1fr; }
     nav { padding: 1rem 1.4rem; }
     .nav-links { gap: 1.4rem; }
     section { padding: 4rem 1.4rem; }
@@ -627,7 +627,7 @@
     <li><a href="#intro">Intro</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#Testimonials">Testimonials</a></li>
+    <li><a href="#Testimonial">Testimonial</a></li>
   </ul>
 </nav>
 
@@ -896,26 +896,20 @@
   </div>
 </section>
 
-<!-- Testimonials -->
-<section id="Testimonials" style="border-top: 1px solid var(--rule);">
-  <div class="Testimonials-left">
+<!-- Testimonial -->
+<section id="Testimonial" style="border-top: 1px solid var(--rule);">
+  <div class="Testimonial-left">
     <div class="section-header" style="margin-bottom:3rem">
-      <h2 class="section-title">Testimonials</h2>
+      <h2 class="section-title">Testimonial</h2>
     </div>
-    <div class="Testimonials-block reveal">
-      <div class="Testimonials-label">Growth Mindset</div>
-      <p class="Testimonials-text">
-        A 0% error rate loading weapons on F-16s, assessing hundreds of AML cases at UOB, and formally verifying neural networks at SUTD all demand the same discipline: rigorous validation before you commit. The domain changes; the standard does not.
-      </p>
-    </div>
-    <div class="Testimonials-block reveal" style="transition-delay:0.15s">
-      <div class="Testimonials-label">Future Goal</div>
-      <p class="Testimonials-text">
-        I aim to apply quantitative modeling and formal verification to financial risk — building systems for credit, market, or operational risk that are not just accurate, but provably resilient under stress.
+    <div class="Testimonial-block reveal">
+      <div class="Testimonial-label">Lisabelle Ho, UOB</div>
+      <p class="Testimonial-text">
+       "Jarren demonstrated exceptional analytical skills and sound judgment in assessing whether to apply risk mitigation controls... His ability to interpret data and make accurate decisions reflects his strong attention to detail and commitment to operational excellence."
       </p>
     </div>
   </div>
-  <div class="Testimonials-right">
+  <div class="Testimonial-right">
     <div class="rule-line">Ethos</div>
     <p class="big-quote reveal">
       "Don't just build models that <em>work</em> — verify that they <em>should</em> be trusted."
