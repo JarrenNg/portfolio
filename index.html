@@ -786,16 +786,16 @@
   <figure style="margin: 0;">
     <img src="images/arima.png" alt="arima" class="reveal" 
          style="width: 100%; height: auto; border-radius: 8px;">
-    <figcaption style="font-size: 0.75rem; color: #888; margin-top: 6px;">
-      ARIMA baseline forecast (orange dashed) vs. actuals — limited capture of exogenous-driven volatility
+    <figcaption style="font-size: 0.8rem; color: #0d0d0d; margin-top: 6px;">
+      ARIMA baseline forecast (orange dashed) vs. actual
     </figcaption>
   </figure>
 
   <figure style="margin: 0;">
     <img src="images/arimax_comparison.png" alt="arimax_comparison" class="reveal"
          style="width: 100%; height: auto; border-radius: 8px;">
-    <figcaption style="font-size: 0.75rem; color: #888; margin-top: 6px;">
-      ARIMAX stress test: actual (red dashed) vs. predicted exogenous variables (purple dashed) — 6.46% test MAPE under realistic forecast conditions
+    <figcaption style="font-size: 0.8rem; color: #0d0d0d; margin-top: 6px;">
+      ARIMAX stress test: Actual (red dashed) vs. Predicted external variables (purple dashed)
     </figcaption>
   </figure>
 </div>
@@ -834,18 +834,35 @@
     </div>
   <div class="project-right">
   <div class="comparison-row">
+  <figure style="margin: 0; width: 48%;">
     <img src="images/before.png" 
        alt="before" 
        class="reveal" 
-       style="width: 48%; height: auto; border-radius: 8px;">
+       style="width: 100%; height: auto; border-radius: 8px;">
+    <figcaption style="font-size: 0.8rem; color: #0d0d0d; margin-top: 6px;">
+     Before: Predicted correctly as Diseased ✓
+    </figcaption>
+  </figure>
+  <figure style="margin: 0; width: 48%;">
     <img src="images/after.png" 
        alt="after" 
        class="reveal"
-       style="width: 48%; height: auto; border-radius: 8px;">  
+       style="width: 100%; height: auto; border-radius: 8px;">  
+    <figcaption style="font-size: 0.8rem; color: #0d0d0d; margin-top: 6px;">
+     After: Prediction changes from Diseased to Healthy ✗
+    </figcaption>
+  </figure>
   </div>
-  <img src="images/perturbation.png" alt="perturbation map" class="full-width-img">
+    <figure style="margin: 0;">
+    <img src="images/perturbation.png" alt="perturbation map" class="full-width-img">
+    <figcaption style="font-size: 0.8rem; color: #0d0d0d; margin-top: 6px;">
+     Perturbation Map which causes the change above, where each pixel brightness is changed by either +0.01 (red) or -0.01 (blue)
+    </figcaption>
+  </figure>
 </div>
 </div>
+
+  
 
 
 <!-- SKILLS -->
