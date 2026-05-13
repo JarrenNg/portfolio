@@ -651,7 +651,7 @@
 
     <p class="intro-role">Financial Risk Management</p>
     <p class="intro-bio">
-      A <strong>"logic-first"</strong> approach to problem-solving. I specialize in transforming complex datasets into actionable insights, with hands-on experience in AML/KYC compliance and quantitative risk modeling. Passionate about credit, market, and operational risk.
+      A <strong>"logic-first"</strong> approach to problem-solving. I specialize in transforming complex datasets into actionable insights, with hands-on experience in AML/KYC compliance and quantitative risk modeling. Passionate about credit, market, and portfolio risk.
     </p>
   </div>
   <div class="intro-right">
@@ -688,7 +688,7 @@
     <div class="project-block reveal" style="transition-delay:0.14s">
       <div class="project-block-label">Objective</div>
       <p class="project-block-text">
-        Construct a high-performance portfolio of 5 stocks (NVDA, MSFT, LLY, JNJ, GD) via mean-variance optimization, targeting the Maximum Sharpe Ratio <strong>(MSR)</strong> portfolio on the Efficient Frontier — maximizing risk-adjusted return.
+        Construct a high-performance portfolio of 5 stocks (NVDA, MSFT, LLY, JNJ, GD) via mean-variance optimization, targeting the Maximum Sharpe Ratio <strong>(MSR)</strong> portfolio on the Efficient Frontier, maximizing risk-adjusted return.
       </p>
     </div>
 
@@ -735,6 +735,10 @@
           </tr>
         </tbody>
       </table>
+      <p class="project-block-text" style="margin-top:1rem">
+        The MSR portfolio accepts higher absolute volatility in exchange for superior risk-adjusted return, as reflected in the Sharpe ratio improvement from 1.39 to 1.57.
+      </p>
+    </div>
     </div>
   </div>
 
@@ -762,7 +766,7 @@
     <div class="project-block reveal" style="transition-delay:0.2s">
       <div class="project-block-label">The Approach</div>
       <p class="project-block-text">
-        Developed multiple iterations to improve model prediction, moving from a univariate ARIMA baseline to a multivariate ARIMAX model that incorporates external variables. Conducted extensive stress testing by comparing performance when using "Actual" vs. "Predicted" exogenous variables.
+        Developed multiple iterations to improve model prediction, moving from a univariate ARIMA baseline to a multivariate ARIMAX model that incorporates external variables. Conducted robustness check by comparing performance when using "Actual" vs. "Predicted" exogenous variables.
       </p>
     </div>
 
@@ -795,7 +799,7 @@
     <img src="images/arimax_comparison.png" alt="arimax_comparison" class="reveal"
          style="width: 100%; height: auto; border-radius: 8px;">
     <figcaption style="font-size: 1.0rem; color: #0d0d0d; margin-top: 6px;">
-      ARIMAX stress test: Actual (red dashed) vs. Predicted external variables (purple dashed)
+      ARIMAX robustness check: Actual (red dashed) vs. Predicted external variables (purple dashed)
     </figcaption>
   </figure>
 </div>
@@ -822,7 +826,7 @@
         <div class="project-block-label">Key Results</div>
         <ul class="key-results-list">
           <li>
-            <span class="result-headline">Failed Certification</span>
+            <span class="result-headline">Certification Result</span>
             Proved the model was not certifiably robust, highlighting critical risks for real-world deployment.
           </li>
           <li>
